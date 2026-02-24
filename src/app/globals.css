@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
+@theme {
+  /* Institutional Palette: Monochrome */
+  --color-primary-900: #111111;
+  /* Deep Black Text/Buttons */
+  --color-primary-800: #222222;
+  /* Hover Black */
+  --color-primary-700: #555555;
+  /* Secondary Text */
+  --color-primary-600: #888888;
+  /* Muted Text */
+  --color-primary-500: #dddddd;
+  /* Muted Lines */
+  --color-primary-100: #f7f7f7;
+  /* Global Background Alt */
+  --color-primary-50: #ffffff;
+  /* Global Background White */
+
+  /* Functional Colors (Monochrome Indicators) */
+  --color-success: #111111;
+  --color-error: #111111;
+  --color-warning: #111111;
+  --color-info: #111111;
+
+  /* Borders */
+  --color-border-light: #e5e5e5;
+  --color-border-dark: #111111;
+
+  /* Spacing */
+  --spacing-section: 64px;
+  --spacing-card: 24px;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #111111;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  @apply antialiased;
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  @apply font-bold text-primary-900 leading-tight tracking-normal;
+}
+
+h1 {
+  @apply text-4xl md:text-5xl;
+}
+
+h2 {
+  @apply text-2xl md:text-3xl border-b border-border-light pb-4 mb-6;
+}
+
+h3 {
+  @apply text-xl font-semibold;
+}
+
+p {
+  @apply text-primary-700 leading-relaxed;
+}
+
+/* Utilities */
+@layer components {
+
+  /* Institutional Card */
+  .nexus-card {
+    @apply bg-white border border-border-light rounded-[6px] shadow-none hover:bg-primary-100 transition-colors duration-200;
+  }
+
+  /* Institutional Sidebar */
+  .nexus-sidebar {
+    @apply bg-white border-r border-border-light h-full;
+  }
+
+  /* Institutional Buttons */
+  .btn-primary {
+    @apply bg-primary-900 text-white font-medium px-5 py-3 rounded-[6px] hover:bg-primary-800 transition-colors duration-200 flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-primary-900 text-primary-900 font-medium px-5 py-3 rounded-[6px] hover:bg-primary-100 transition-colors duration-200 flex items-center justify-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply text-primary-700 hover:text-primary-900 hover:bg-primary-100 px-4 py-2 rounded-[6px] transition-colors flex items-center justify-center gap-2;
+  }
+
+  /* Form Elements */
+  .nexus-input {
+    @apply bg-white border border-border-light rounded-[6px] px-4 py-3 text-primary-900 placeholder:text-primary-600 focus:border-primary-900 focus:ring-0 focus:outline-none transition-colors w-full;
+  }
+
+  .nexus-label {
+    @apply block text-sm font-semibold text-primary-900 mb-2 uppercase tracking-wide;
+  }
+
+  /* Status Badges */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider border;
+  }
+
+  .badge-active {
+    @apply bg-white text-primary-900 border-primary-900;
+  }
+
+  .badge-pending {
+    @apply bg-white text-primary-700 border-primary-600 border-dashed;
+  }
+
+  .badge-dispute {
+    @apply bg-white text-primary-900 border-primary-900 underline decoration-1 underline-offset-2;
+  }
+
+  .badge-frozen {
+    @apply bg-primary-100 text-primary-600 border-primary-500 line-through;
+  }
+
+  /* Layout Containers */
+  .page-container {
+    @apply min-h-screen pt-24 px-6 md:px-12 max-w-7xl mx-auto;
+  }
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-500 rounded-full hover:bg-primary-700 transition-colors;
 }
